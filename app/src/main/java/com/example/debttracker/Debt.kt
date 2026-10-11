@@ -5,5 +5,6 @@ data class Debt(
     var name: String = "",
     var reason: String = "",
     var amount: Double = 0.0,
-    var revtag: String = ""
+    var revtag: String = "",
+
 )
