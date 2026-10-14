@@ -72,9 +72,12 @@ fun updateDebt() {
         print("Enter New Reason: ")
         val reason = readlnOrNull()?.trim().orEmpty()
         print("Enter New Amount: ")
+        val amount = readAmount() ?: return
+        print("Enter a new revtag(optional")
+        val revtag = readRevtag() ?: return
 
         if (name.isNotEmpty()) {
-            val updated = store.update(Debt(id = id, name = name, reason = reason))
+            val updated = store.update(Debt(id = id, name = name, reason = reason, amount = amount, revtag = revtag))
             if (updated) println("Debt updated successfully.")
         } else {
             println("There must be a name. Update cancelled.")
@@ -112,7 +115,7 @@ fun searchDebt() {
     if (id != null) {
         val debt = store.findOne(id)
         if (debt != null) {
-            println("Found: ID: ${debt.id} | Name: ${debt.name} | Reason: ${debt.reason}")
+            println("Found: ID: ${debt.id} | Name: ${debt.name} | Reason: ${debt.reason} | Amount: ${debt.amount} | Revtag: ${debt.revtag}")
         } else {
             println("No debt found with ID $id.")
         }
