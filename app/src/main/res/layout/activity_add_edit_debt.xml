@@ -7,4 +7,74 @@
     android:layout_height="match_parent"
     tools:context=".AddEditDebtActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/formTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Debt"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/reasonInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Reason"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/amountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Amount (€)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/revtagInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Revtag (optional)"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
