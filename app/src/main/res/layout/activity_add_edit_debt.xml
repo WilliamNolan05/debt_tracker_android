@@ -60,6 +60,12 @@
                 android:inputType="text" />
 
             <Button
+                android:id="@+id/dueDateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pick due date (optional)" />
+
+            <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

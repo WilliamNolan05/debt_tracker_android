@@ -25,6 +25,9 @@ class DebtAdapter(
         val amountText: TextView =
             itemView.findViewById(R.id.amountText)
 
+        val dueDateText: TextView =
+            itemView.findViewById(R.id.dueDateText)
+
         val editButton: Button =
             itemView.findViewById(R.id.editButton)
 
@@ -62,6 +65,9 @@ class DebtAdapter(
 
         holder.amountText.text =
             "€${"%.2f".format(debt.amount)}  ${debt.revtag}"
+
+        holder.dueDateText.text =
+            if (debt.dueDate.isEmpty()) "No due date" else "Due: ${debt.dueDate}"
 
         holder.editButton.setOnClickListener {
             onEdit(debt)
