@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
+import com.google.android.material.appbar.MaterialToolbar
 
 class DebtListActivity : AppCompatActivity() {
 
@@ -27,6 +28,9 @@ class DebtListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setSupportActionBar(findViewById<MaterialToolbar>(R.id.toolbar))
+        supportActionBar?.title = "Your Debts"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         recyclerView =
             findViewById(R.id.debtsRecyclerView)
@@ -41,6 +45,7 @@ class DebtListActivity : AppCompatActivity() {
             onDelete = { debt ->
                 deleteDebt(debt)
             }
+
         )
 
         recyclerView.layoutManager =

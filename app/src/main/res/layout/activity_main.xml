@@ -35,4 +35,5 @@
             android:layout_marginTop="16dp"
             android:text="Add Debt" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

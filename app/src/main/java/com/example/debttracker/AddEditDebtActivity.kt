@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.app.DatePickerDialog
 import java.util.Calendar
+import com.google.android.material.appbar.MaterialToolbar
 
 class AddEditDebtActivity : AppCompatActivity() {
 
@@ -32,6 +33,10 @@ class AddEditDebtActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setSupportActionBar(findViewById<MaterialToolbar>(R.id.toolbar))
+        supportActionBar?.title = "Add Debt"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         nameInput =
             findViewById(R.id.nameInput)
         reasonInput =
@@ -53,8 +58,7 @@ class AddEditDebtActivity : AppCompatActivity() {
                 .takeIf { it != -1L }
 
         if (editingId != null) {
-            findViewById<TextView>(R.id.formTitle)
-                .text = "Edit Debt"
+            supportActionBar?.title = "Edit Debt"
 
             loadExistingDebt(editingId!!)
         }

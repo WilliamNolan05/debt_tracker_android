@@ -24,10 +24,12 @@
         <activity
             android:name=".DebtListActivity"
             android:exported="false"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".AddEditDebtActivity"
             android:exported="false"
+            android:parentActivityName=".DebtListActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
 
