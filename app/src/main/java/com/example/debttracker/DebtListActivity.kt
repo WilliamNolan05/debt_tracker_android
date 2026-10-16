@@ -9,11 +9,14 @@ import android.content.Intent
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 
 class DebtListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DebtAdapter
+    private lateinit var searchInput: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,13 @@ class DebtListActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
+        searchInput =
+            findViewById(R.id.searchInput)
+
+        searchInput.doAfterTextChanged {
+            showDebts()
+        }
+
         val returnButton =
             findViewById<Button>(R.id.returnButton)
 
@@ -57,9 +67,7 @@ class DebtListActivity : AppCompatActivity() {
         super.onResume()
 
         if (::adapter.isInitialized) {
-            adapter.updateDebts(
-                AppData.debts.findAll()
-            )
+            showDebts()
         }
     }
 
@@ -74,9 +82,19 @@ class DebtListActivity : AppCompatActivity() {
 
     private fun deleteDebt(debt: Debt){
         AppData.debts.delete(debt.id)
+        showDebts()
+    }
 
-        adapter.updateDebts(
-            AppData.debts.findAll()
-        )
+    private fun showDebts() {
+        val query =
+            searchInput.text.toString().trim()
+
+        val debts =
+            AppData.debts.findAll().filter { debt ->
+                debt.name.contains(query, ignoreCase = true) ||
+                        debt.reason.contains(query, ignoreCase=true) ||
+                        debt.revtag.contains(query, ignoreCase=true)
+            }
+        adapter.updateDebts(debts)
     }
 }

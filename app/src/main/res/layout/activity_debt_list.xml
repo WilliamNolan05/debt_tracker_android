@@ -21,6 +21,15 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search by name, reason or revtag"
+            android:inputType="text"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/debtsRecyclerView"
             android:layout_width="match_parent"
