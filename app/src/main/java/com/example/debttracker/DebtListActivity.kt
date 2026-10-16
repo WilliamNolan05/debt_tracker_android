@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DebtListActivity : AppCompatActivity() {
 
@@ -77,9 +78,16 @@ class DebtListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun deleteDebt(debt: Debt){
-        AppData.debts.delete(debt.id)
-        showDebts()
+    private fun deleteDebt(debt: Debt) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Delete debt?")
+            .setMessage("Delete ${debt.name}'s debt of €%.2f?".format(debt.amount))
+            .setNegativeButton("Cancel", null)
+            .setPositiveButton("Delete") { _, _ ->
+                AppData.debts.delete(debt.id)
+                showDebts()
+            }
+            .show()
     }
 
     private fun showDebts() {
