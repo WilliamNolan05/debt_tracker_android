@@ -50,8 +50,6 @@ class AddEditDebtActivity : AppCompatActivity() {
 
         val saveButton =
             findViewById<Button>(R.id.saveButton)
-        val cancelButton =
-            findViewById<Button>(R.id.cancelButton)
 
         editingId =
             intent.getLongExtra("id", -1L)
@@ -65,10 +63,6 @@ class AddEditDebtActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             saveDebt()
-        }
-
-        cancelButton.setOnClickListener {
-            finish()
         }
 
         dueDateButton.setOnClickListener {

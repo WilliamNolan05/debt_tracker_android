@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.EditText
@@ -59,13 +58,6 @@ class DebtListActivity : AppCompatActivity() {
         searchInput.doAfterTextChanged {
             showDebts()
         }
-
-        val returnButton =
-            findViewById<Button>(R.id.returnButton)
-
-        returnButton.setOnClickListener {
-            finish()
-        }
     }
 
     override fun onResume() {
@@ -101,5 +93,8 @@ class DebtListActivity : AppCompatActivity() {
                         debt.revtag.contains(query, ignoreCase=true)
             }
         adapter.updateDebts(debts)
+
+        supportActionBar?.subtitle =
+            "Total owed: €%.2f".format(debts.sumOf { it.amount })
     }
 }
