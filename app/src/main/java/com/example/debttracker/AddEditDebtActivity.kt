@@ -9,7 +9,9 @@ import android.widget.EditText
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-
+import android.app.DatePickerDialog
+import java.util.Calendar
+import com.google.android.material.appbar.MaterialToolbar
 
 class AddEditDebtActivity : AppCompatActivity() {
 
@@ -17,7 +19,9 @@ class AddEditDebtActivity : AppCompatActivity() {
     private lateinit var reasonInput: EditText
     private lateinit var amountInput: EditText
     private lateinit var revtagInput: EditText
+    private lateinit var dueDateButton: Button
 
+    private var dueDate: String = ""
     private var editingId: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +33,10 @@ class AddEditDebtActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setSupportActionBar(findViewById<MaterialToolbar>(R.id.toolbar))
+        supportActionBar?.title = "Add Debt"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         nameInput =
             findViewById(R.id.nameInput)
         reasonInput =
@@ -37,6 +45,8 @@ class AddEditDebtActivity : AppCompatActivity() {
             findViewById(R.id.amountInput)
         revtagInput =
             findViewById(R.id.revtagInput)
+        dueDateButton =
+            findViewById(R.id.dueDateButton)
 
         val saveButton =
             findViewById<Button>(R.id.saveButton)
@@ -48,8 +58,7 @@ class AddEditDebtActivity : AppCompatActivity() {
                 .takeIf { it != -1L }
 
         if (editingId != null) {
-            findViewById<TextView>(R.id.formTitle)
-                .text = "Edit Debt"
+            supportActionBar?.title = "Edit Debt"
 
             loadExistingDebt(editingId!!)
         }
@@ -60,6 +69,10 @@ class AddEditDebtActivity : AppCompatActivity() {
 
         cancelButton.setOnClickListener {
             finish()
+        }
+
+        dueDateButton.setOnClickListener {
+            pickDueDate()
         }
     }
 
@@ -83,6 +96,10 @@ class AddEditDebtActivity : AppCompatActivity() {
             reasonInput.setText(debt.reason)
             amountInput.setText(debt.amount.toString())
             revtagInput.setText(debt.revtag)
+            dueDate = debt.dueDate
+        if (dueDate.isNotEmpty()) {
+            dueDateButton.text = "Due: $dueDate"
+        }
         }
 
     private fun saveDebt() {
@@ -117,7 +134,8 @@ class AddEditDebtActivity : AppCompatActivity() {
                 name = name,
                 reason = reason,
                 amount = amount,
-                revtag = revtag
+                revtag = revtag,
+                dueDate = dueDate
             )
 
             AppData.debts.create(debt)
@@ -133,7 +151,8 @@ class AddEditDebtActivity : AppCompatActivity() {
                 name = name,
                 reason = reason,
                 amount = amount,
-                revtag = revtag
+                revtag = revtag,
+                dueDate = dueDate
             )
 
             AppData.debts.update(debt)
@@ -146,5 +165,20 @@ class AddEditDebtActivity : AppCompatActivity() {
         }
 
         finish()
+    }
+
+    private fun pickDueDate() {
+        val calendar = Calendar.getInstance()
+
+        DatePickerDialog(
+            this,
+            {_, year, month, day ->
+                dueDate = "%02d/%02d/%d".format(day, month + 1, year)
+                dueDateButton.text = "Due: $dueDate"
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
     }
 }

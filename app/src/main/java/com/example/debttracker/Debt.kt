@@ -6,5 +6,5 @@ data class Debt(
     var reason: String = "",
     var amount: Double = 0.0,
     var revtag: String = "",
-
+    var dueDate: String = ""
 )

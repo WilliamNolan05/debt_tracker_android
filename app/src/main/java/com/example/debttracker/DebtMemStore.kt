@@ -22,6 +22,7 @@ class DebtMemStore : DebtStore{
             foundDebt.reason = debt.reason
             foundDebt.amount = debt.amount
             foundDebt.revtag = debt.revtag
+            foundDebt.dueDate = debt.dueDate
             true
         } else {
             false
