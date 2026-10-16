@@ -71,9 +71,7 @@ fun updateDebt() {
         val name = readlnOrNull()?.trim().orEmpty()
         print("Enter New Reason: ")
         val reason = readlnOrNull()?.trim().orEmpty()
-        print("Enter New Amount: ")
         val amount = readAmount() ?: return
-        print("Enter a new revtag(optional")
         val revtag = readRevtag() ?: return
 
         if (name.isNotEmpty()) {

@@ -1,6 +1,8 @@
 package com.example.debttracker
 
 import android.os.Bundle
+import android.widget.Button
+import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,16 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        val viewDebtsButton = findViewById<Button>(R.id.viewDebtsButton)
+        val addDebtButton = findViewById<Button>(R.id.addDebtButton)
+
+        viewDebtsButton.setOnClickListener {
+            startActivity(Intent(this, DebtListActivity::class.java))
+        }
+
+        addDebtButton.setOnClickListener {
+            startActivity(Intent(this, AddEditDebtActivity::class.java))
         }
     }
 }
